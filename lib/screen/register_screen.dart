@@ -11,17 +11,28 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController confirmPasswordController = TextEditingController();
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    confirmPasswordController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Todo"),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        
       ),
       body: Center(
         child: Container(
-          height: 350,
+          height: 400,
           width: 300,
           padding: const EdgeInsets.all(18),
           decoration: BoxDecoration(
@@ -34,38 +45,48 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 "Register",
                 style: TextStyle(fontSize: 40),
               ),
-              const TextField(
-                decoration: InputDecoration(
+              TextField(
+                controller: emailController,
+                decoration: const InputDecoration(
                     labelText: "Email", border: OutlineInputBorder()),
               ),
-              const SizedBox(
-                height: 10,
+              const SizedBox(height: 10),
+              TextField(
+                controller: passwordController,
+                decoration: const InputDecoration(
+                  labelText: "Password",
+                  border: OutlineInputBorder(),
+                ),
+                keyboardType: TextInputType.visiblePassword,
+                maxLength: 8,
+                obscureText: true,
               ),
-              const TextField(
-                decoration: InputDecoration(
-                    labelText: "Password", border: OutlineInputBorder()),
+              const SizedBox(height: 10),
+              TextField(
+                controller: confirmPasswordController,
+                decoration: const InputDecoration(
+                  labelText: "Confirm Password",
+                  border: OutlineInputBorder(),
+                ),
+                keyboardType: TextInputType.visiblePassword,
+                maxLength: 8,
+                obscureText: true,
               ),
-              const SizedBox(
-                height: 10,
-              ),
-              const TextField(
-                decoration: InputDecoration(
-                    labelText: "confirmPassword", border: OutlineInputBorder()),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
+              const SizedBox(height: 10),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   TextButton(
                       onPressed: () async {
                         var res = await AuthService().reqistration(
-                            email: "chetsada.pho@kkumail.com",
-                            password: "123456789",
-                            confirm: "123456789");
+                            email: emailController.text,
+                            password: passwordController.text,
+                            confirm: confirmPasswordController.text);
                         if (res == 'success') {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => LoginScreen()));
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => LoginScreen()));
                         }
                         print(res);
                       },
@@ -73,8 +94,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   TextButton(
                       onPressed: () async {
                         var res = await AuthService().signin(
-                            email: "chetsada.pho@kkumail.com",
-                            password: "123456789");
+                            email: emailController.text,
+                            password: passwordController.text);
 
                         if (res == "success") {
                           Navigator.pushReplacement(
@@ -82,11 +103,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             MaterialPageRoute(builder: (context) => TodoApp()),
                           );
                         } else {
-                          print(
-                              "Login failed with message: $res"); // แสดงข้อความ error ที่ได้รับ
-                          // แสดงข้อความบน UI
-                          ScaffoldMessenger.of(context)
-                              .showSnackBar(SnackBar(content: Text(res!)));
+                          print("Login failed with message: $res");
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text(res!)));
                         }
                       },
                       child: const Text("Login"))

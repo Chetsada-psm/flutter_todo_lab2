@@ -11,13 +11,22 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Todo"),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        
       ),
       body: Center(
         child: Container(
@@ -34,20 +43,19 @@ class _LoginScreenState extends State<LoginScreen> {
                 "ToDo",
                 style: TextStyle(fontSize: 40),
               ),
-              const TextField(
-                decoration: InputDecoration(
+              TextField(
+                controller: emailController,
+                decoration: const InputDecoration(
                     labelText: "Email", border: OutlineInputBorder()),
               ),
-              const SizedBox(
-                height: 10,
-              ),
-              const TextField(
-                decoration: InputDecoration(
+              const SizedBox(height: 10),
+              TextField(
+                controller: passwordController,
+                decoration: const InputDecoration(
                     labelText: "Password", border: OutlineInputBorder()),
+                obscureText: true,
               ),
-              const SizedBox(
-                height: 10,
-              ),
+              const SizedBox(height: 10),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -61,24 +69,24 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: const Text("Register"),
                   ),
                   TextButton(
-                      onPressed: () async {
-                        var res = await AuthService().signin(
-                          email: "chetsada.pho@kkumail.com",
-                          password: "123456789",
-                        );
+                    onPressed: () async {
+                      var res = await AuthService().signin(
+                        email: emailController.text,
+                        password: passwordController.text,
+                      );
 
-                        if (res == "success") {
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(builder: (context) => TodoApp()),
-                          );
-                        } else {
-                          print("Login failed with message: $res");
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(res!)));
-                        }
-                      },
-                      child: const Text("Login"),
-                    )
+                      if (res == "success") {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(builder: (context) => TodoApp()),
+                        );
+                      } else {
+                        print("Login failed with message: $res");
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(res!)));
+                      }
+                    },
+                    child: const Text("Login"),
+                  )
                 ],
               )
             ],

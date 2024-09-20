@@ -42,17 +42,17 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions web = FirebaseOptions(
     apiKey: 'AIzaSyDma8qPL3h8LZ15FxdbXj6f-FHI99xv5Cc',
-    appId: '1:565106634867:web:5b5e60114f02f4e3c9ba06',
+    appId: '1:565106634867:web:5a1c873ae0d7955bc9ba06',
     messagingSenderId: '565106634867',
     projectId: 'flutter-todo-lab-81e79',
     authDomain: 'flutter-todo-lab-81e79.firebaseapp.com',
     storageBucket: 'flutter-todo-lab-81e79.appspot.com',
-    measurementId: 'G-VQPXGNPNKE',
+    measurementId: 'G-TTC9YS08CR',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
     apiKey: 'AIzaSyCdZ8wrngqXvE0kiTylxKe5JaWxkLf16PA',
-    appId: '1:565106634867:ios:46443e46ef8530d5c9ba06',
+    appId: '1:565106634867:ios:e3b0c7c049b59c75c9ba06',
     messagingSenderId: '565106634867',
     projectId: 'flutter-todo-lab-81e79',
     storageBucket: 'flutter-todo-lab-81e79.appspot.com',
@@ -61,7 +61,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyCdZ8wrngqXvE0kiTylxKe5JaWxkLf16PA',
-    appId: '1:565106634867:ios:46443e46ef8530d5c9ba06',
+    appId: '1:565106634867:ios:e3b0c7c049b59c75c9ba06',
     messagingSenderId: '565106634867',
     projectId: 'flutter-todo-lab-81e79',
     storageBucket: 'flutter-todo-lab-81e79.appspot.com',
@@ -70,7 +70,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyDaYP1gg_eTiILiExsgepLZnszYfBFzs3g',
-    appId: '1:565106634867:android:bbb312a2bb939baac9ba06',
+    appId: '1:565106634867:android:73dd0eefaa05cee7c9ba06',
     messagingSenderId: '565106634867',
     projectId: 'flutter-todo-lab-81e79',
     storageBucket: 'flutter-todo-lab-81e79.appspot.com',
@@ -78,12 +78,12 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions windows = FirebaseOptions(
     apiKey: 'AIzaSyDma8qPL3h8LZ15FxdbXj6f-FHI99xv5Cc',
-    appId: '1:565106634867:web:79e379cde9c538a6c9ba06',
+    appId: '1:565106634867:web:b3cacc50e66e11bec9ba06',
     messagingSenderId: '565106634867',
     projectId: 'flutter-todo-lab-81e79',
     authDomain: 'flutter-todo-lab-81e79.firebaseapp.com',
     storageBucket: 'flutter-todo-lab-81e79.appspot.com',
-    measurementId: 'G-45FZ1Y7WCW',
+    measurementId: 'G-W1B4Y33D4M',
   );
 
 }

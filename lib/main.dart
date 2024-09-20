@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_todo_lab2/screen/login_screen.dart';
+import 'package:flutter_todo_lab2/service/auth_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,21 +20,21 @@ class MainApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Color(0xFF1E9BE9)),
         useMaterial3: true,
       ),
-      home: const TodaApp(),
+      home: const LoginScreen(),
     );
   }
 }
 
-class TodaApp extends StatefulWidget {
-  const TodaApp({
+class TodoApp extends StatefulWidget {
+  const TodoApp({
     super.key,
   });
 
   @override
-  State<TodaApp> createState() => _TodaAppState();
+  State<TodoApp> createState() => _TodaAppState();
 }
 
-class _TodaAppState extends State<TodaApp> {
+class _TodaAppState extends State<TodoApp> {
   late TextEditingController _nameController;
   late TextEditingController _noteController;
   bool _status = false; // ตัวแปรสำหรับสถานะ
@@ -256,6 +258,15 @@ class _TodaAppState extends State<TodaApp> {
       appBar: AppBar(
         title: const Text("Todo"),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        actions: [
+          IconButton(icon: const Icon(Icons.logout),
+          onPressed: ()async {
+            await AuthService().logout();
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => LoginScreen()));
+          })
+        ],
       ),
       body: StreamBuilder(
         stream: FirebaseFirestore.instance.collection("Task").snapshots(),

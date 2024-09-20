@@ -7,7 +7,7 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:565106634867:android:bbb312a2bb939baac9ba06",
+        "mobilesdk_app_id": "1:565106634867:android:73dd0eefaa05cee7c9ba06",
         "android_client_info": {
           "package_name": "com.example.flutter_todo_lab2"
         }

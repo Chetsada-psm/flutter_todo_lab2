@@ -53,7 +53,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 children: [
                   TextButton(
                     onPressed: () {
-                      Navigator.push(
+                      Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(builder: (context) => RegisterScreen()),
                       );
@@ -63,23 +63,22 @@ class _LoginScreenState extends State<LoginScreen> {
                   TextButton(
                       onPressed: () async {
                         var res = await AuthService().signin(
-                            email: "chetsada.pho@kkumail.com",
-                            password: "123456789");
+                          email: "chetsada.pho@kkumail.com",
+                          password: "123456789",
+                        );
 
                         if (res == "success") {
-                          Navigator.push(
+                          Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(builder: (context) => TodoApp()),
                           );
                         } else {
-                          print(
-                              "Login failed with message: $res"); // แสดงข้อความ error ที่ได้รับ
-                          // แสดงข้อความบน UI
-                          ScaffoldMessenger.of(context)
-                              .showSnackBar(SnackBar(content: Text(res!)));
+                          print("Login failed with message: $res");
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(res!)));
                         }
                       },
-                      child: const Text("Login"))
+                      child: const Text("Login"),
+                    )
                 ],
               )
             ],

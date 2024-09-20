@@ -77,7 +77,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             password: "123456789");
 
                         if (res == "success") {
-                          Navigator.push(
+                          Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(builder: (context) => TodoApp()),
                           );
